@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Círculo Motion Graphic - Minimalista & Dinámico</title>
+    <!-- Tailwind para centrado y fondo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Animaciones base de rotación */
+        @keyframes girar {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes girar-inverso {
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+
+        /* Animación fluida de armado y desarmado (dibujar y borrar) */
+        @keyframes armar-desarmar {
+            0% {
+                stroke-dashoffset: 565;
+            }
+
+            /* Circunferencia completa de r=90 */
+            50% {
+                stroke-dashoffset: 0;
+            }
+
+            100% {
+                stroke-dashoffset: -565;
+            }
+        }
+
+        /* Animación para líneas secundarias */
+        @keyframes pulso-opacidad {
+
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* 
+         * ESTILOS MINIMALISTAS MULTI-CAPA
+         * Usamos colores sólidos, líneas finas y cortes limpios.
+         */
+
+        .centro-solido {
+            fill: #ffffff;
+            transform-origin: center;
+            /* Pequeño pulso de opacidad para darle vida al centro */
+            animation: pulso-opacidad 4s ease-in-out infinite;
+        }
+
+        /* Pista interior 1: Punteado rápido */
+        .pista-interior-1 {
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 1;
+            stroke-dasharray: 4 8;
+            /* Punteado corto */
+            transform-origin: center;
+            animation: girar 8s linear infinite;
+        }
+
+        /* Pista interior 2: Línea segmentada blanca */
+        .pista-interior-2 {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.6);
+            /* Blanco semitransparente */
+            stroke-width: 2;
+            stroke-dasharray: 40 20 10 20;
+            /* Ritmo irregular */
+            transform-origin: center;
+            animation: girar-inverso 15s linear infinite;
+        }
+
+        /* Pista intermedia: Celeste continuo pero fino */
+        .pista-intermedia-celeste {
+            fill: none;
+            stroke: #7dd3fc;
+            /* Celeste suave (sky-300) */
+            stroke-width: 0.5;
+            transform-origin: center;
+            animation: girar 30s linear infinite;
+        }
+
+        /* Pista exterior: El trazo dinámico que se arma y desarma */
+        .pista-exterior-dinamica {
+            fill: none;
+            stroke: #0ea5e9;
+            /* Celeste vibrante (sky-500) */
+            stroke-width: 2.5;
+            /* Línea principal ligeramente más gruesa */
+            stroke-linecap: butt;
+            /* Corte recto, más técnico */
+
+            /* Circunferencia exacta para r=90 (2 * PI * 90 = 565.48) */
+            stroke-dasharray: 565;
+            transform-origin: center;
+
+            /* Combina el giro inverso con el efecto de dibujado perfecto */
+            animation:
+                armar-desarmar 3.5s ease-in-out infinite,
+                girar-inverso 12s linear infinite;
+        }
+
+        .contenedor-animacion {
+            width: 100%;
+            max-width: 320px;
+            /* Tamaño generoso para apreciar el detalle */
+            aspect-ratio: 1 / 1;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-950 flex items-center justify-center min-h-screen m-0 overflow-hidden selection:bg-sky-500 selection:text-white">
+
+    <div class="contenedor-animacion">
+        <svg viewBox="0 0 200 200" width="100%" height="100%">
+            <!-- 
+                5 elementos en total.
+                Diseño nítido: sin filtros de desenfoque ni gradientes.
+            -->
+            <g>
+                <!-- Centro -->
+                <circle class="centro-solido" cx="100" cy="100" r="6" />
+
+                <!-- Capas Blancas Internas -->
+                <circle class="pista-interior-1" cx="100" cy="100" r="35" />
+                <circle class="pista-interior-2" cx="100" cy="100" r="55" />
+
+                <!-- Capas Celestes Externas -->
+                <circle class="pista-intermedia-celeste" cx="100" cy="100" r="75" />
+                <circle class="pista-exterior-dinamica" cx="100" cy="100" r="90" />
+            </g>
+        </svg>
+    </div>
+
+</body>
+
+</html>

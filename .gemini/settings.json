@@ -1,0 +1,19 @@
+{
+      "mcpServers": {
+        "remotion-mcp": {
+          "command": "npx",
+          "args": ["-y", "@remotion/mcp@latest"]
+        }
+      }
+    }
+    ```
+
+    El comando `-y` es fundamental para que el paquete se instale sin pedirte confirmación en la terminal interactiva, ya que Gemini ejecuta esto en segundo plano.
+  
+  
+    Para que Gemini Code Assist lea el nuevo archivo, necesitas reiniciar el entorno. Si estás en VS Code, presiona **Ctrl+Shift+P** (o **Cmd+Shift+P** en Mac), busca **Developer: Reload Window** y ejecútalo.
+  
+  
+    Abre el panel de Gemini Code Assist y asegúrate de tener activado el **Modo Agente** (el switch suele estar en la parte inferior o superior del panel). Escribe el comando `/mcp` en el chat y presiona Enter.
+    
+    Deberías ver `remotion-mcp` listado con estado conectado.

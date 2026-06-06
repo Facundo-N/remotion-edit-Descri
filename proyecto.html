@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campaña 25 de Mayo - Aroma a Café</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons for UI -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            /* Slate 900 - Premium Dark */
+            background-image: radial-gradient(circle at top right, #1e293b, #0f172a);
+            color: #f8fafc;
+        }
+
+        .phone-mockup {
+            width: 320px;
+            height: 660px;
+            background-color: #000;
+            border-radius: 45px;
+            border: 8px solid #334155;
+            /* Slate 700 - Metallic edge */
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 0 2px #0f172a, 0 30px 60px -12px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Dynamic Island */
+        .dynamic-island {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 28px;
+            background-color: #000;
+            border-radius: 20px;
+            z-index: 50;
+        }
+
+        .video-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: background-image 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: kenburns 12s infinite alternate linear;
+            opacity: 0.9;
+        }
+
+        @keyframes kenburns {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.12);
+            }
+        }
+
+        .ig-sticker {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.35;
+            max-width: 85%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            letter-spacing: -0.01em;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .fade-out {
+            animation: fadeOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px) translate(-50%, -50%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) translate(-50%, -50%);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0) translate(-50%, -50%);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(-15px) translate(-50%, -50%);
+            }
+        }
+
+        @keyframes logoReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.9) translate(-50%, -50%);
+                filter: blur(4px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1) translate(-50%, -50%);
+                filter: blur(0);
+            }
+        }
+
+        .logo-reveal {
+            animation: logoReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .center-absolute {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .progress-bar-container {
+            position: absolute;
+            top: 45px;
+            /* Below dynamic island */
+            left: 3%;
+            width: 94%;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            z-index: 20;
+            display: flex;
+            gap: 2px;
+        }
+
+        .progress-segment {
+            height: 100%;
+            background: white;
+            width: 0%;
+            border-radius: 2px;
+        }
+
+        .reel-ui {
+            position: absolute;
+            bottom: 25px;
+            right: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            align-items: center;
+            color: white;
+            z-index: 10;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .reel-bottom-info {
+            position: absolute;
+            bottom: 25px;
+            left: 12px;
+            color: white;
+            z-index: 10;
+            width: 75%;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        .scenario-btn {
+            transition: all 0.2s ease;
+        }
+
+        .scenario-btn.active {
+            background-color: rgba(217, 119, 6, 0.1);
+            /* Amber 600 ultra light */
+            border-color: #d97706;
+            /* Amber 600 */
+        }
+
+        .scenario-btn:not(.active):hover {
+            background-color: rgba(30, 41, 59, 0.8);
+            /* Slate 800 */
+            border-color: #475569;
+            /* Slate 600 */
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex items-center justify-center p-4 lg:p-8">
+
+    <div
+        class="max-w-7xl w-full bg-slate-900/50 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-slate-800 overflow-hidden flex flex-col lg:flex-row h-auto lg:h-[85vh]">
+
+        <!-- Left Panel: Strategy & Controls -->
+        <div class="lg:w-7/12 p-6 lg:p-10 flex flex-col h-full overflow-y-auto">
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <span
+                        class="px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-semibold uppercase tracking-wider rounded-full border border-amber-500/30">
+                        Dashboard de Campaña
+                    </span>
+                    <span class="text-slate-400 text-sm">| Prototipo V3.0 (Dark Mode)</span>
+                </div>
+
+                <h1 class="text-3xl lg:text-4xl font-bold text-white mb-2 tracking-tight">Estrategia: 25 de Mayo</h1>
+                <h2 class="text-lg lg:text-xl text-amber-500 font-medium mb-6">Aroma a Café <span
+                        class="text-white">☕️🇦🇷</span></h2>
+
+                <p class="text-slate-300 text-sm mb-6 leading-relaxed font-light">
+                    Seleccioná el segmento de audiencia para previsualizar el contenido <strong
+                        class="text-white">"Anti-Anuncio"</strong>. El enfoque está en el <strong>UGC (User Generated
+                        Content)</strong>: capturar la atención en 3 segundos hablando de sus problemas o deseos, antes
+                    de revelar nuestra marca como la solución.
+                </p>
+
+                <h3 class="text-slate-400 text-xs font-semibold uppercase tracking-widest mb-3">Targeting de Audiencia
+                    (4 Arquetipos)</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <!-- 1. RRHH -->
+                    <button onclick="playScenario(0)" id="btn-0"
+                        class="scenario-btn active text-left p-3 rounded-2xl border border-amber-600 bg-amber-600/10 flex items-start gap-3 group">
+                        <div
+                            class="bg-slate-800 p-2 rounded-xl border border-slate-700 group-hover:border-amber-500/50 transition-colors">
+                            <i class="ph ph-buildings text-lg text-amber-500"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-white text-sm">1. RRHH / Office Manager</div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">Humor corporativo + Alivio</div>
+                        </div>
+                    </button>
+
+                    <!-- 2. Event Planner -->
+                    <button onclick="playScenario(1)" id="btn-1"
+                        class="scenario-btn text-left p-3 rounded-2xl border border-slate-700 bg-slate-800/50 flex items-start gap-3 group">
+                        <div
+                            class="bg-slate-800 p-2 rounded-xl border border-slate-700 group-hover:border-slate-500 transition-colors">
+                            <i class="ph ph-clipboard-text text-lg text-slate-300"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-white text-sm">2. Event Planner</div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">ASMR estético + Estatus</div>
+                        </div>
+                    </button>
+
+                    <!-- 3. Anfitrión -->
+                    <button onclick="playScenario(2)" id="btn-2"
+                        class="scenario-btn text-left p-3 rounded-2xl border border-slate-700 bg-slate-800/50 flex items-start gap-3 group">
+                        <div
+                            class="bg-slate-800 p-2 rounded-xl border border-slate-700 group-hover:border-slate-500 transition-colors">
+                            <i class="ph ph-house-line text-lg text-slate-300"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-white text-sm">3. Anfitrión Premium</div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">Comedia cómplice + Facilidad</div>
+                        </div>
+                    </button>
+
+                    <!-- 4. Público General -->
+                    <button onclick="playScenario(3)" id="btn-3"
+                        class="scenario-btn text-left p-3 rounded-2xl border border-slate-700 bg-slate-800/50 flex items-start gap-3 group">
+                        <div
+                            class="bg-slate-800 p-2 rounded-xl border border-slate-700 group-hover:border-slate-500 transition-colors">
+                            <i class="ph ph-users text-lg text-slate-300"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-white text-sm">4. Público General</div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">Brand Awareness + Tradición</div>
+                        </div>
+                    </button>
+
+                    <!-- 5. Guion Oficial (Master) -->
+                    <button onclick="playScenario(4)" id="btn-4"
+                        class="scenario-btn md:col-span-2 text-left p-3 rounded-2xl border border-slate-700 bg-slate-800/50 flex items-start gap-3 group shadow-[0_0_15px_rgba(245,158,11,0.05)]">
+                        <div
+                            class="bg-slate-800 p-2 rounded-xl border border-slate-700 group-hover:border-slate-500 transition-colors">
+                            <i class="ph-fill ph-star text-lg text-slate-300"></i>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-white text-sm">5. Video Principal (Guion Oficial)</div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">Adaptación exacta del guion provisto, con
+                                locución y llamado a la acción.</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-6">
+                <div
+                    class="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50 flex items-start gap-3 shadow-inner">
+                    <div class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center shrink-0 mt-1">
+                        <i class="ph-fill ph-speaker-high text-slate-300"></i>
+                    </div>
+                    <div>
+                        <p class="text-[10px] text-amber-500/80 font-bold uppercase tracking-wider mb-1">Directiva de
+                            Edición (Audio)</p>
+                        <p id="audioInstruction" class="text-xs text-white font-medium leading-relaxed">Cargando...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel: Phone Mockup -->
+        <div
+            class="lg:w-5/12 bg-slate-950 p-6 flex items-center justify-center border-l border-slate-800 relative shadow-inner">
+
+            <div class="phone-mockup">
+                <!-- Dynamic Island (Notch) -->
+                <div class="dynamic-island"></div>
+
+                <!-- Video Background -->
+                <div id="videoBg" class="video-bg"
+                    style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80');">
+                </div>
+
+                <!-- Dark Gradient Overlay for text readability -->
+                <div
+                    class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80 z-0 pointer-events-none">
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-bar-container">
+                    <div id="progressBar" class="progress-segment"></div>
+                </div>
+
+                <!-- Text Overlays (Dynamic) -->
+                <div class="center-absolute z-10 w-full px-4">
+                    <div id="hookText" class="ig-sticker opacity-0" style="transform: rotate(-2deg);">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <div class="center-absolute z-10 w-full px-4">
+                    <div id="solutionText" class="ig-sticker opacity-0"
+                        style="background-color: rgba(255, 255, 255, 0.95); color: #0f172a;">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Logo Overlay CTA -->
+                <div id="logoOverlay" class="center-absolute z-20 flex-col items-center opacity-0 hidden">
+                    <div
+                        class="bg-black/70 backdrop-blur-md p-6 rounded-3xl text-center border border-white/10 shadow-2xl">
+                        <div
+                            class="w-16 h-16 bg-amber-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-lg">
+                            <i class="ph-fill ph-coffee text-3xl text-white"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-white tracking-tight">AROMA A CAFÉ</h2>
+                        <p class="text-amber-400 text-[10px] mt-1 uppercase tracking-widest font-semibold">Barras
+                            Móviles</p>
+                        <p id="ctaSubtitle" class="text-white text-[11px] mt-3 font-medium hidden">Quedan pocos cupos
+                            para el 25.</p>
+                        <div id="ctaButton"
+                            class="mt-3 px-5 py-2.5 bg-white text-black text-xs font-bold rounded-full hover:bg-slate-200 transition-colors cursor-pointer shadow-lg shadow-white/20">
+                            Reservá para el 25
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reel UI Overlay (Static elements) -->
+                <div class="reel-ui">
+                    <div class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
+                        <i class="ph-fill ph-heart text-[28px] text-white"></i>
+                        <span class="text-[10px] mt-1 font-medium shadow-black">12.4k</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
+                        <i class="ph-fill ph-chat-circle text-[28px] text-white"></i>
+                        <span class="text-[10px] mt-1 font-medium">156</span>
+                    </div>
+                    <div class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity">
+                        <i class="ph ph-paper-plane-tilt text-[28px] text-white"></i>
+                        <span class="text-[10px] mt-1 font-medium">842</span>
+                    </div>
+                    <div class="flex flex-col items-center mt-1 cursor-pointer hover:opacity-80 transition-opacity">
+                        <i class="ph ph-dots-three text-[28px] text-white"></i>
+                    </div>
+                    <div class="w-8 h-8 rounded-md bg-white border border-white/50 overflow-hidden mt-3 animate-spin shadow-lg"
+                        style="animation-duration: 5s; animation-timing-function: linear;">
+                        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=100&q=80"
+                            alt="Audio track" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <div class="reel-bottom-info">
+                    <div class="flex items-center gap-2 mb-2">
+                        <div
+                            class="w-7 h-7 rounded-full bg-amber-600 flex items-center justify-center border border-white/20 shadow-sm">
+                            <i class="ph-fill ph-coffee text-white text-xs"></i>
+                        </div>
+                        <span class="font-bold text-[13px] tracking-tight">aromaacafe.ok</span>
+                        <button
+                            class="border border-white/50 px-2 py-0.5 rounded text-[9px] font-bold backdrop-blur-sm hover:bg-white/20 transition-colors uppercase tracking-wide">Seguir</button>
+                    </div>
+                    <p id="captionText" class="text-[11px] font-normal line-clamp-2 leading-tight mb-3 text-slate-100">
+                        <!-- Filled by JS -->
+                    </p>
+                    <div
+                        class="flex items-center gap-2 text-[10px] font-medium bg-black/40 w-fit px-2 py-1 rounded-full backdrop-blur-md border border-white/10">
+                        <i class="ph-fill ph-music-notes text-amber-400"></i>
+                        <marquee scrollamount="3" class="w-24" id="audioText">Audio original - Tendencia</marquee>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data for the 4 Scenarios
+        const scenarios = [
+            {
+                id: 0,
+                bg1: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80", // Stressed at desk
+                bg2: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=80", // Calm, beautiful coffee machine
+                hookText: "POV: Sos de RRHH, falta una semana para el 25 de mayo y te tiraron la organización del evento por la cabeza 😭☕️",
+                solutionText: "Tranqui, nosotros nos encargamos de todo. 💆‍♀️✨",
+                caption: "Guardá este reel para cuando necesites paz mental. 🧘‍♀️ Nosotros armamos la estación de café, vos llevate el crédito en la oficina. #25deMayo #RRHH #EventosCorporativos",
+                audio: "Teclado rápido ➡️ Suspiro + Lofi Hip Hop",
+                audioPanel: "Audio Tendencia: Iniciar con sonido asmr de tipeo estresante, y hacer una transición abrupta cómica a música 'Lofi / Chill' para generar la sensación de alivio absoluto."
+            },
+            {
+                id: 1,
+                bg1: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=600&q=80", // Cinematic coffee pour
+                bg2: "https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=600&q=80", // Perfect setup
+                hookText: "Ese momento de paz cuando el proveedor se encarga de absolutamente TODO 🧘‍♀️✨",
+                solutionText: "Estética y sabor premium para tus clientes. ☕️",
+                caption: "El detrás de escena (BTS) que todo Event Planner ama ver. Instalación impecable, baristas listos, café de especialidad. #EventPlanner #CoffeeCatering #DecoracionEventos",
+                audio: "ASMR Café ➡️ Música Cinematic Aesthetic",
+                audioPanel: "Audio ASMR: Sonido súper nítido de café sirviéndose o moliéndose, seguido inmediatamente de una pieza instrumental de piano muy elegante y estética (Aesthetic Vlog Music)."
+            },
+            {
+                id: 2,
+                bg1: "https://images.unsplash.com/photo-1528495612343-9ca9f4a4de28?auto=format&fit=crop&w=600&q=80", // Friends laughing / Host POV
+                bg2: "https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=600&q=80", // Focus on coffee cup / relax
+                hookText: "Yo creyéndome Masterchef el 25 de mayo (spoiler: llamé a Aroma a Café) 🤫🇦🇷",
+                solutionText: "El secreto mejor guardado para lucirte con tus amigos. 😎",
+                caption: "Mentira que me levanté a las 6 AM a preparar todo. Pedí el servicio de alquiler y disfruté como un invitado más. Etiquetá a ese amigo que se estresa organizando. 👇 #25deMayo #Anfitrion",
+                audio: "Voz en Off Comedia ➡️ Pop Alegre",
+                audioPanel: "Audio Viral Reels: Voz en off en tono de comedia susurrando 'Nadie lo va a saber...', y cuando se revela la solución, entra música alegre, dinámica y moderna."
+            },
+            {
+                id: 3,
+                bg1: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=600&q=80", // People enjoying coffee / Cafe vibe
+                bg2: "https://images.unsplash.com/photo-1495474472205-51f77ba6aa6c?auto=format&fit=crop&w=600&q=80", // Close up latte art or pouring
+                hookText: "Feriado del 25 de Mayo: Pastelitos, locro y... falta algo vital ☕️🇦🇷",
+                solutionText: "Llevamos la cafetería de especialidad a donde estés. 🤎",
+                caption: "Este 25 de mayo, no importa dónde celebres, el buen café no puede faltar. Conocé nuestro servicio de barras móviles. Link en bio. #25deMayo #CafeDeEspecialidad #AromaACafe",
+                audio: "Folklore/Himno Lofi ➡️ Beat Moderno",
+                audioPanel: "Audio Nostálgico: Una versión instrumental acústica suave, o Folklore en estilo Lofi con reminiscencias patrias, ideal para generar 'cozy vibes' de feriado."
+            },
+            {
+                id: 4,
+                bg1: "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=80", // Aesthetic coffee making
+                bg2: "https://images.unsplash.com/photo-1528495612343-9ca9f4a4de28?auto=format&fit=crop&w=600&q=80", // Group of people / team gathering
+                hookText: "Este 25 de Mayo, tu evento merece el mejor café. ☕️🇦🇷",
+                solutionText: "Llevamos el servicio completo. Vos solo disfrutá con tu gente. ✨",
+                caption: "En cada celebración patria, en cada reunión de equipo, en cada momento que vale la pena recordar: Aroma a Café está presente. Llevamos nuestro servicio completo para que vos solo te preocupes por disfrutar con tu gente.\n\nQuedan pocos cupos para el 25. Reservá ahora. 📲",
+                audio: "Voz en Off Cálida ➡️ Música Acústica Emotiva",
+                audioPanel: "Locución: Leer el guion de forma cálida ('En cada celebración patria...'). De fondo, sonido ambiente de reunión feliz y música instrumental (guitarra acústica o piano) que crezca en intensidad hacia el final.",
+                ctaSub: "Quedan pocos cupos para el 25.",
+                ctaBtn: "Reservá ahora"
+            }
+        ];
+
+        let currentAnimationTimeouts = [];
+        let progressInterval;
+
+        function resetTimeline() {
+            // Clear all pending timeouts to prevent overlapping animations
+            currentAnimationTimeouts.forEach(clearTimeout);
+            clearInterval(progressInterval);
+            currentAnimationTimeouts = [];
+
+            // Reset UI Elements completely
+            document.getElementById('hookText').className = 'ig-sticker opacity-0 absolute';
+            document.getElementById('solutionText').className = 'ig-sticker opacity-0 absolute';
+            document.getElementById('logoOverlay').className = 'center-absolute z-20 flex-col items-center opacity-0 hidden';
+            document.getElementById('progressBar').style.width = '0%';
+        }
+
+        function playScenario(index) {
+            const data = scenarios[index];
+
+            // Update UI buttons styling
+            document.querySelectorAll('.scenario-btn').forEach((btn, i) => {
+                const icon = btn.querySelector('i');
+                if (i === index) {
+                    btn.classList.add('active', 'border-amber-600', 'bg-amber-600/10');
+                    btn.classList.remove('border-slate-700', 'bg-slate-800/50');
+                    icon.classList.remove('text-slate-300');
+                    icon.classList.add('text-amber-500');
+                } else {
+                    btn.classList.remove('active', 'border-amber-600', 'bg-amber-600/10');
+                    btn.classList.add('border-slate-700', 'bg-slate-800/50');
+                    icon.classList.add('text-slate-300');
+                    icon.classList.remove('text-amber-500');
+                }
+            });
+
+            resetTimeline();
+
+            // Populate content for the specific scenario
+            document.getElementById('videoBg').style.backgroundImage = `url('${data.bg1}')`;
+            document.getElementById('hookText').innerText = data.hookText;
+            document.getElementById('solutionText').innerText = data.solutionText;
+            document.getElementById('captionText').innerText = data.caption;
+            document.getElementById('audioText').innerText = data.audio;
+            document.getElementById('audioInstruction').innerText = data.audioPanel;
+
+            // Handle CTA variations dynamically
+            const ctaSub = document.getElementById('ctaSubtitle');
+            if (data.ctaSub) {
+                ctaSub.innerText = data.ctaSub;
+                ctaSub.classList.remove('hidden');
+            } else {
+                ctaSub.classList.add('hidden');
+            }
+            document.getElementById('ctaButton').innerText = data.ctaBtn || "Reservá para el 25";
+
+            // Start Timeline sequence
+            runTimeline(data);
+        }
+
+        function runTimeline(data) {
+            const totalDuration = 9000; // 9 seconds total reel
+            let progress = 0;
+
+            // Progress Bar Animation (Smooth 30ms updates)
+            progressInterval = setInterval(() => {
+                progress += (100 / (totalDuration / 30));
+                document.getElementById('progressBar').style.width = `${Math.min(progress, 100)}%`;
+            }, 30);
+
+            // Timeline Sequence
+            // 0s: Show Hook Text (The pain point)
+            currentAnimationTimeouts.push(setTimeout(() => {
+                document.getElementById('hookText').className = 'ig-sticker center-absolute fade-in';
+            }, 150));
+
+            // 3.5s: Change BG, Hide Hook, Show Solution (The twist)
+            currentAnimationTimeouts.push(setTimeout(() => {
+                document.getElementById('hookText').className = 'ig-sticker center-absolute fade-out';
+                document.getElementById('videoBg').style.backgroundImage = `url('${data.bg2}')`;
+
+                setTimeout(() => {
+                    document.getElementById('solutionText').className = 'ig-sticker center-absolute fade-in';
+                }, 400);
+            }, 3500));
+
+            // 6.5s: Hide Solution, Show Logo Call to Action (The pitch)
+            currentAnimationTimeouts.push(setTimeout(() => {
+                document.getElementById('solutionText').className = 'ig-sticker center-absolute fade-out';
+
+                setTimeout(() => {
+                    const logo = document.getElementById('logoOverlay');
+                    logo.classList.remove('hidden');
+                    logo.classList.add('logo-reveal');
+                }, 300);
+            }, 6500));
+
+            // 9s: Loop Reel automatically
+            currentAnimationTimeouts.push(setTimeout(() => {
+                playScenario(data.id); // Loop back to current scenario seamlessly
+            }, totalDuration));
+        }
+
+        // Initialize first scenario on load
+        window.onload = () => {
+            playScenario(4); // Cargar el Guion Oficial por defecto
+        };
+    </script>
+</body>
+
+</html>
