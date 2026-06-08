@@ -1,0 +1,236 @@
+{
+  "text": " máquina de café profesional, cápsulas, premio en variadas, bajilla elegante, montaje completo, retiros sin rastros, todo en un solo pack coordinado por nosotros.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 3.76,
+      "text": " máquina de café profesional, cápsulas, premio en variadas,",
+      "tokens": [
+        50364,
+        49360,
+        368,
+        25118,
+        42882,
+        11,
+        6476,
+        1878,
+        16968,
+        11,
+        5624,
+        1004,
+        465,
+        3034,
+        6872,
+        11,
+        50552
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.4526727596918742,
+      "compression_ratio": 1.28125,
+      "no_speech_prob": 0.010467934422194958,
+      "words": [
+        {
+          "word": " máquina",
+          "start": 0.0,
+          "end": 0.36,
+          "probability": 0.36197617650032043
+        },
+        {
+          "word": " de",
+          "start": 0.36,
+          "end": 0.56,
+          "probability": 0.9959443211555481
+        },
+        {
+          "word": " café",
+          "start": 0.56,
+          "end": 0.74,
+          "probability": 0.9685125946998596
+        },
+        {
+          "word": " profesional,",
+          "start": 0.74,
+          "end": 1.4,
+          "probability": 0.9806351661682129
+        },
+        {
+          "word": " cápsulas,",
+          "start": 2.12,
+          "end": 2.64,
+          "probability": 0.8053155144055685
+        },
+        {
+          "word": " premio",
+          "start": 2.64,
+          "end": 3.08,
+          "probability": 0.45020708441734314
+        },
+        {
+          "word": " en",
+          "start": 3.08,
+          "end": 3.18,
+          "probability": 0.17076869308948517
+        },
+        {
+          "word": " variadas,",
+          "start": 3.18,
+          "end": 3.76,
+          "probability": 0.9382179081439972
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 4.76,
+      "end": 9.2,
+      "text": " bajilla elegante, montaje completo, retiros sin rastros,",
+      "tokens": [
+        50602,
+        23589,
+        5291,
+        14459,
+        2879,
+        11,
+        8143,
+        11153,
+        40135,
+        11,
+        1533,
+        21633,
+        3343,
+        367,
+        525,
+        2635,
+        11,
+        50826
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.4526727596918742,
+      "compression_ratio": 1.28125,
+      "no_speech_prob": 0.010467934422194958,
+      "words": [
+        {
+          "word": " bajilla",
+          "start": 4.76,
+          "end": 5.26,
+          "probability": 0.8605131804943085
+        },
+        {
+          "word": " elegante,",
+          "start": 5.26,
+          "end": 5.84,
+          "probability": 0.9399908185005188
+        },
+        {
+          "word": " montaje",
+          "start": 6.3,
+          "end": 6.8,
+          "probability": 0.9736146926879883
+        },
+        {
+          "word": " completo,",
+          "start": 6.8,
+          "end": 7.4,
+          "probability": 0.9699565172195435
+        },
+        {
+          "word": " retiros",
+          "start": 8.12,
+          "end": 8.46,
+          "probability": 0.7762699723243713
+        },
+        {
+          "word": " sin",
+          "start": 8.46,
+          "end": 8.7,
+          "probability": 0.7527003884315491
+        },
+        {
+          "word": " rastros,",
+          "start": 8.7,
+          "end": 9.2,
+          "probability": 0.978816012541453
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 9.74,
+      "end": 12.66,
+      "text": " todo en un solo pack coordinado por nosotros.",
+      "tokens": [
+        50856,
+        5149,
+        465,
+        517,
+        6944,
+        2844,
+        8285,
+        1573,
+        1515,
+        13863,
+        13,
+        51004
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.4526727596918742,
+      "compression_ratio": 1.28125,
+      "no_speech_prob": 0.010467934422194958,
+      "words": [
+        {
+          "word": " todo",
+          "start": 9.74,
+          "end": 10.0,
+          "probability": 0.9902412295341492
+        },
+        {
+          "word": " en",
+          "start": 10.0,
+          "end": 10.22,
+          "probability": 0.9947918057441711
+        },
+        {
+          "word": " un",
+          "start": 10.22,
+          "end": 10.34,
+          "probability": 0.9770739674568176
+        },
+        {
+          "word": " solo",
+          "start": 10.34,
+          "end": 10.56,
+          "probability": 0.9534928798675537
+        },
+        {
+          "word": " pack",
+          "start": 10.56,
+          "end": 10.92,
+          "probability": 0.5275189876556396
+        },
+        {
+          "word": " coordinado",
+          "start": 10.92,
+          "end": 11.98,
+          "probability": 0.690526157617569
+        },
+        {
+          "word": " por",
+          "start": 11.98,
+          "end": 12.16,
+          "probability": 0.9907264709472656
+        },
+        {
+          "word": " nosotros.",
+          "start": 12.16,
+          "end": 12.66,
+          "probability": 0.9970821738243103
+        }
+      ]
+    }
+  ],
+  "language": "es"
+}

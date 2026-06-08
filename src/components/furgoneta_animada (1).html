@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furgoneta Animada</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e9ecef;
+            overflow: hidden;
+        }
+        
+        .scene-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        svg {
+            max-width: 90vw;
+            max-height: 90vh;
+            animation: bounce 1.5s infinite alternate ease-in-out;
+            z-index: 10;
+        }
+
+        /* --- Animaciones --- */
+        
+        @keyframes roll {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .wheel-spin {
+            transform-origin: 0px 0px;
+            animation: roll 1s linear infinite;
+        }
+
+        @keyframes bounce {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-4px); }
+        }
+
+        @keyframes moveRoad {
+            from { background-position: 0 0; }
+            to { background-position: -200px 0; }
+        }
+
+        @keyframes smokeAnim {
+            0% { transform: translate(0, 0) scale(0.5); opacity: 0.8; }
+            100% { transform: translate(-150px, -40px) scale(2.5); opacity: 0; }
+        }
+
+        .smoke-puff {
+            transform-origin: 35px 285px;
+            animation: smokeAnim 1.5s infinite linear;
+        }
+        
+        .puff-1 { animation-delay: 0s; }
+        .puff-2 { animation-delay: 0.5s; }
+        .puff-3 { animation-delay: 1s; }
+
+        /* Animación de arrastre para la puerta corredera */
+        @keyframes slideDoor {
+            0%, 15% { transform: translateX(0); }               /* Cerrada */
+            30%, 75% { transform: translateX(-160px); }         /* Abierta (Muestra la caja) */
+            90%, 100% { transform: translateX(0); }             /* Vuelve a cerrarse */
+        }
+
+        .sliding-door {
+            /* Usamos ease-in-out para que el arranque y el frenado de la puerta sean suaves */
+            animation: slideDoor 7s infinite cubic-bezier(0.4, 0.0, 0.2, 1);
+        }
+
+        .road {
+            position: absolute;
+            bottom: 25vh;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: repeating-linear-gradient(
+                90deg,
+                #6c757d,
+                #6c757d 40px,
+                #e9ecef 40px,
+                #e9ecef 80px
+            );
+            background-size: 200px 100%;
+            animation: moveRoad 1s linear infinite;
+            z-index: 5;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+    </style>
+</head>
+<body>
+    <div class="scene-container">
+        <div class="road"></div>
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="100%" height="100%">
+          <defs>
+            <style>
+              .body-color { fill: #B0855A; }
+              .trim-dark { fill: #2D2E2E; }
+              .line-dark { stroke: #2D2E2E; stroke-linecap: round; }
+              .panel-line { fill: none; stroke: #997047; stroke-width: 3; }
+              .glass { fill: #596E7F; stroke: #2D2E2E; stroke-width: 4; stroke-linejoin: round; }
+              .tire { fill: #333333; }
+              .hub { fill: #D1D3D4; }
+            </style>
+          </defs>
+
+          <!-- Sombra base -->
+          <ellipse cx="400" cy="345" rx="350" ry="10" fill="rgba(0,0,0,0.15)" />
+
+          <!-- Humo -->
+          <g fill="#A9A9A9" opacity="0.8">
+            <circle cx="35" cy="285" r="10" class="smoke-puff puff-1"/>
+            <circle cx="35" cy="285" r="12" class="smoke-puff puff-2"/>
+            <circle cx="35" cy="285" r="14" class="smoke-puff puff-3"/>
+          </g>
+
+          <!-- Fondo inferior / Base oscura -->
+          <rect x="45" y="270" width="715" height="20" rx="3" class="trim-dark" />
+
+          <!-- Parachoques -->
+          <path d="M 40 230 L 50 230 L 50 290 L 40 290 Q 35 290 35 285 L 35 235 Q 35 230 40 230 Z" class="trim-dark"/>
+          <path d="M 720 235 L 755 235 L 763 245 L 763 290 L 720 290 Z" class="trim-dark"/>
+
+          <!-- Chasis Principal -->
+          <path d="M 50 100 Q 50 80 70 80 L 420 80 Q 480 80 520 110 L 640 190 L 735 225 L 750 250 L 750 270 L 50 270 Z" class="body-color"/>
+
+          <!-- ========================================== -->
+          <!-- INTERIOR Y CAJA (Ocultos por la puerta)    -->
+          <!-- ========================================== -->
+          <g id="van-interior">
+            <!-- Hueco Oscuro del interior -->
+            <rect x="244" y="82" width="177" height="188" fill="#1A1A1A" />
+            <!-- Sombra interior superior -->
+            <rect x="244" y="82" width="177" height="15" fill="#000" opacity="0.5" />
+
+            <!-- La Caja -->
+            <rect x="260" y="132" width="140" height="138" fill="#C19A6B" rx="3" />
+            <rect x="260" y="132" width="140" height="138" fill="none" stroke="#8C6239" stroke-width="2" rx="3" />
+            
+            <!-- Cinta de embalar -->
+            <rect x="320" y="132" width="20" height="138" fill="#D2B48C" opacity="0.8" />
+            <line x1="320" y1="132" x2="320" y2="270" stroke="#8C6239" stroke-width="1" opacity="0.5" />
+            <line x1="340" y1="132" x2="340" y2="270" stroke="#8C6239" stroke-width="1" opacity="0.5" />
+            
+            <!-- Etiqueta de envío -->
+            <rect x="270" y="160" width="40" height="25" fill="#FFF8DC" rx="2" />
+            <line x1="275" y1="168" x2="305" y2="168" stroke="#333" stroke-width="2" />
+            <line x1="275" y1="176" x2="295" y2="176" stroke="#333" stroke-width="2" />
+            
+            <!-- Etiqueta FRÁGIL -->
+            <rect x="350" y="150" width="40" height="40" fill="#E3242B" rx="2" />
+            <text x="370" y="175" font-family="Arial, sans-serif" font-weight="bold" font-size="10" fill="#FFF" text-anchor="middle">FRÁGIL</text>
+          </g>
+
+          <!-- ========================================== -->
+          <!-- PUERTA CORREDERA (Grupo Animado)           -->
+          <!-- ========================================== -->
+          <g class="sliding-door">
+            <!-- Base de la puerta que tapa el hueco -->
+            <rect x="243" y="80" width="179" height="190" fill="#B0855A" />
+            
+            <!-- Panel decorativo -->
+            <rect x="250" y="95" width="155" height="120" rx="6" class="panel-line"/>
+            
+            <!-- Protector lateral oscuro de la puerta -->
+            <line x1="250" y1="230" x2="415" y2="230" class="line-dark" stroke-width="7" />
+            
+            <!-- Manija de la puerta corredera -->
+            <rect x="360" y="178" width="35" height="8" rx="4" fill="#1A1A1A" />
+            
+            <!-- Sombras/Bordes para darle profundidad al separarse del chasis -->
+            <line x1="244" y1="80" x2="244" y2="270" stroke="#997047" stroke-width="2" />
+            <line x1="421" y1="80" x2="421" y2="270" stroke="#997047" stroke-width="2" />
+          </g>
+
+          <!-- Paneles Estáticos -->
+          <g id="body-panels">
+            <rect x="75" y="95" width="155" height="120" rx="6" class="panel-line"/>
+            
+            <!-- Riel por donde se desliza la puerta -->
+            <line x1="100" y1="175" x2="242" y2="175" class="line-dark" stroke-width="4"/>
+            
+            <!-- Líneas divisorias del marco de las puertas -->
+            <line x1="242" y1="80" x2="242" y2="270" class="line-dark" stroke-width="2.5"/>
+            <line x1="423" y1="80" x2="423" y2="270" class="line-dark" stroke-width="2.5"/>
+            <line x1="600" y1="185" x2="600" y2="270" class="line-dark" stroke-width="2.5"/>
+          </g>
+
+          <!-- Protectores Estáticos -->
+          <g id="side-trims" stroke-width="7" class="line-dark">
+            <line x1="75" y1="230" x2="235" y2="230" />
+            <line x1="430" y1="230" x2="590" y2="230" />
+          </g>
+
+          <!-- Cristales -->
+          <g id="windows">
+            <path d="M 435 95 L 480 95 L 580 180 L 435 180 Z" class="glass"/>
+            <path d="M 590 180 L 630 180 L 595 145 Z" class="glass"/>
+            <rect x="580" y="130" width="12" height="40" rx="5" class="trim-dark"/>
+            <polygon points="592,145 610,155 610,165 592,175" class="trim-dark"/>
+          </g>
+
+          <!-- Manija de la puerta delantera -->
+          <g id="door-handles" fill="#1A1A1A">
+            <rect x="445" y="178" width="35" height="8" rx="4" />
+          </g>
+
+          <!-- Luces -->
+          <g id="lights">
+            <path d="M 45 170 L 52 170 L 52 230 L 45 230 Z" fill="#E6E6E6"/>
+            <rect x="45" y="175" width="7" height="15" fill="#F49E00"/>
+            <rect x="45" y="190" width="7" height="25" fill="#E3242B"/>
+            <rect x="45" y="215" width="7" height="10" fill="#FFFFFF"/>
+            <path d="M 725 220 L 743 226 L 750 250 L 730 250 L 720 235 Z" fill="#3D85C6"/>
+            <path d="M 725 220 L 743 226 L 735 230 L 720 225 Z" fill="#F49E00"/>
+          </g>
+
+          <!-- Pasos de Rueda (Se dibujan DESPUÉS de la puerta para que al abrirse no tape la rueda) -->
+          <path d="M 105 290 A 65 65 0 0 1 235 290 Z" fill="#252525"/>
+          <path d="M 585 290 A 65 65 0 0 1 715 290 Z" fill="#252525"/>
+
+          <!-- Ruedas -->
+          <g transform="translate(170, 290)">
+            <circle cx="0" cy="0" r="50" class="tire"/>
+            <circle cx="0" cy="0" r="38" fill="#1A1A1A"/>
+            <g class="wheel-spin">
+                <circle cx="0" cy="0" r="28" class="hub"/>
+                <circle cx="0" cy="0" r="20" fill="#1A1A1A"/>
+                <g stroke="#D1D3D4" stroke-width="5" stroke-linecap="round">
+                   <line x1="0" y1="-20" x2="0" y2="20" />
+                   <line x1="-20" y1="0" x2="20" y2="0" />
+                   <line x1="-14" y1="-14" x2="14" y2="14" />
+                   <line x1="-14" y1="14" x2="14" y2="-14" />
+                </g>
+                <circle cx="0" cy="0" r="8" class="hub"/>
+                <circle cx="0" cy="0" r="3" fill="#1A1A1A"/>
+                <g fill="#1A1A1A">
+                  <circle cx="0" cy="-14" r="1.5" />
+                  <circle cx="0" cy="14" r="1.5" />
+                  <circle cx="-14" cy="0" r="1.5" />
+                  <circle cx="14" cy="0" r="1.5" />
+                </g>
+            </g>
+          </g>
+
+          <g transform="translate(650, 290)">
+            <circle cx="0" cy="0" r="50" class="tire"/>
+            <circle cx="0" cy="0" r="38" fill="#1A1A1A"/>
+            <g class="wheel-spin">
+                <circle cx="0" cy="0" r="28" class="hub"/>
+                <circle cx="0" cy="0" r="20" fill="#1A1A1A"/>
+                <g stroke="#D1D3D4" stroke-width="5" stroke-linecap="round">
+                   <line x1="0" y1="-20" x2="0" y2="20" />
+                   <line x1="-20" y1="0" x2="20" y2="0" />
+                   <line x1="-14" y1="-14" x2="14" y2="14" />
+                   <line x1="-14" y1="14" x2="14" y2="-14" />
+                </g>
+                <circle cx="0" cy="0" r="8" class="hub"/>
+                <circle cx="0" cy="0" r="3" fill="#1A1A1A"/>
+                <g fill="#1A1A1A">
+                  <circle cx="0" cy="-14" r="1.5" />
+                  <circle cx="0" cy="14" r="1.5" />
+                  <circle cx="-14" cy="0" r="1.5" />
+                  <circle cx="14" cy="0" r="1.5" />
+                </g>
+            </g>
+          </g>
+        </svg>
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+{
+  "audioFile": "elevenlabs_beats.mp3",
+  "durationSec": 13.270204081632652,
+  "sampleRate": 44100,
+  "fps": 30,
+  "regions": [
+    {
+      "start": 0,
+      "end": 1.5614512471655329
+    },
+    {
+      "start": 2.2448979591836733,
+      "end": 4.015873015873016
+    },
+    {
+      "start": 4.784126984126984,
+      "end": 7.56780045351474
+    },
+    {
+      "start": 8.066666666666666,
+      "end": 9.174149659863945
+    },
+    {
+      "start": 9.887528344671201,
+      "end": 10.915192743764173
+    },
+    {
+      "start": 11.533786848072562,
+      "end": 12.805895691609978
+    }
+  ],
+  "assignments": [
+    {
+      "beat": 1,
+      "label": "Beat1 — Máquina de café profesional",
+      "startSec": 0,
+      "endSec": 1.5614512471655329,
+      "startFrame": 0,
+      "endFrame": 47,
+      "durationFrames": 47,
+      "durationSec": 1.5614512471655329,
+      "matchPct": "87.2"
+    },
+    {
+      "beat": 2,
+      "label": "Beat2 — Cápsulas premium variadas",
+      "startSec": 4.784126984126984,
+      "endSec": 7.56780045351474,
+      "startFrame": 144,
+      "endFrame": 227,
+      "durationFrames": 83,
+      "durationSec": 2.7836734693877556,
+      "matchPct": "98.7"
+    }
+  ],
+  "orderChanged": true,
+  "suggestedConstants": {
+    "SCENE_FRAMES": {
+      "beat1": 47,
+      "beat2": 83
+    },
+    "BEATS_VO_OFFSETS": {
+      "beat1": 0,
+      "beat2": 144
+    }
+  }
+}

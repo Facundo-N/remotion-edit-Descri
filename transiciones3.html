@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transiciones Estructurales</title>
+<style>
+  /* RESET Y VARIABLES */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background-color: #111;
+    overflow: hidden; /* Oculta todo lo que salga de la cámara */
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  /* CÁMARA (PERSPECTIVA 3D) */
+  .camera-view {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    perspective: 1200px; /* Vital para el efecto de rotación 3D */
+    transform-style: preserve-3d;
+  }
+
+  /* 1. FONDO (Representa al presentador) */
+  .background-placeholder {
+    position: absolute;
+    top: -10%; left: -10%;
+    width: 120%; height: 120%;
+    background: repeating-linear-gradient(
+      45deg,
+      #222,
+      #222 20px,
+      #2a2a2a 20px,
+      #2a2a2a 40px
+    );
+    /* Animación global de zoom y desenfoque */
+    animation: bg-timeline 15s infinite cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  /* 2. CONTENEDOR CENTRAL DE ESCENA (Para el objeto y el texto) */
+  .scene-container {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; height: 100%;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Zoom out general que ocurre en el segundo 0.18 */
+    animation: scene-zoom 15s infinite ease-in-out;
+  }
+
+  /* TEXTO DETRÁS DEL OBJETO */
+  .text-layer {
+    position: absolute;
+    font-size: 8vw;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1;
+    letter-spacing: 5px;
+    z-index: 1;
+    opacity: 0;
+  }
+
+  /* Texto 1 ("Harder Than Ever" abstracto) */
+  .text-1 {
+    color: #fff;
+    text-shadow: 0 0 20px rgba(255,255,255,0.5);
+    animation: text-1-timeline 15s infinite ease-in-out;
+  }
+  .text-1 span { display: block; color: #666; font-size: 6vw; }
+
+  /* Texto 2 ("No Plan" abstracto) */
+  .text-2 {
+    color: #ddd;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+    animation: text-2-timeline 15s infinite ease-in-out;
+  }
+
+  /* 3. OBJETO CENTRAL (La "Placa") */
+  .center-object {
+    position: absolute;
+    width: 250px;
+    height: 180px;
+    background: linear-gradient(135deg, #444, #111);
+    border: 2px solid #666;
+    border-radius: 15px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+    z-index: 2; /* Sobre el texto */
+    opacity: 0;
+    /* Curva elástica para la entrada y animaciones 3D */
+    animation: object-timeline 15s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* 4. RECUADROS POP-UPS ALREDEDOR */
+  .popups-grid {
+    position: absolute;
+    width: 80%; height: 80%;
+    z-index: 3;
+    pointer-events: none;
+    transform-style: preserve-3d;
+  }
+
+  .popup {
+    position: absolute;
+    width: 120px; height: 70px;
+    background: #333;
+    border: 1px solid #555;
+    border-radius: 8px;
+    opacity: 0;
+    /* Cada popup usará la variable CSS --delay para el efecto escalonado */
+    animation: popup-timeline 15s infinite cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation-delay: var(--delay);
+  }
+
+  /* Posicionamiento abstracto de los pop-ups */
+  .p1 { top: 10%; left: 15%; --delay: 0.0s; }
+  .p2 { top: 20%; right: 10%; --delay: 0.1s; }
+  .p3 { bottom: 15%; left: 10%; --delay: 0.2s; }
+  .p4 { bottom: 20%; right: 20%; --delay: 0.15s; }
+  .p5 { top: 40%; left: 5%; --delay: 0.05s; }
+  .p6 { top: 50%; right: 5%; --delay: 0.25s; }
